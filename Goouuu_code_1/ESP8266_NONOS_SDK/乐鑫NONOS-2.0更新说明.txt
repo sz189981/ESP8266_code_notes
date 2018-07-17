@@ -1,0 +1,32 @@
+ESP8266_NONOS_SDK_V2.0.0_16_07_19 发布说明 
+libphy.a 更新至 1055，解决 Light-sleep 有时电流偏大的问题；
+AT+ 更新至 1.3.0：
+2.1、新增 Light-sleep 唤醒命令，AT+WAKEUPGDIO；
+2.2、修正 AT+CWDHCPS IP 池分配异常问题；
+2.3、在 examples 目录下新增 at_sdio 示例；
+修正调用 cur、def 接口时可能存在的系统状态错误；
+修正 Deep-sleep 之前未关闭 SPI 导致 Deep-sleep 时电流过大问题；
+修正调用 wifi_set_phy_mode 后从 AP 切到 Station 模式时可能出现的 crash；
+更新二级 boot 到 v1.6：
+6.1、支持 AT + SDIO 的需求；
+6.2、支持通过 GPIO 控制进入测试模式；
+增加对其他 2 线转 4 线 SPI Flash 的支持；
+修正 TCP 握手重传时引起的 Exception；
+修正 ESP-NOW 问题；
+新增 ESP-PAIR（Simple-Pair）功能，具体 API 请参考手册；
+wpa2-enterprise time 函数导出由用户设置，及 time check disable 由用户设置；
+wpa2-enterprise 新增 PEAP/TTLS 支持，具体 API 请参考手册；
+在 examples 目录下新增 mqtt 示例；
+其他问题的修正；
+修正部分情况下，RF_Init_data 系统参数区可能被破坏的问题。新增 user_rf_cal_sector_set，用户程序必须实现此接口，详细参见文档 “2C-ESP8266__SDK__API Guide”。 (1.5.4.1中解决）
+修正外部复位后，小概率存在 rf 不工作的问题。（1.5.4.1中解决）
+新增AT针对SDIO的支持。（1.5.4.1中加入）
+修正espconn中一处潜在问题。（1.5.4.1中解决）
+
+ESP8266_NONOS_SDK 注意事项:
+esp_init_data.bin 至少需要烧录一次到 flash。
+建议整个系统需要做初始化设置时，或需要重新进行 RF_CAL 时，烧录 blank.bin 到 RF_CAL 参数区 (由 user_rf_cal_sector_set 设置)，并烧录 esp_init_data.bin 到 flash。
+
+AT 注意事项:
+从版本 ESP8266_NONOS_SDK_V1.5.0 起，AT 固件所需空间增大，无法再使用 4Mbit (512KB) Flash，请使用 8Mbit (1MB) 或以上容量 Flash。
+我司优化了 AT 固件的升级流程，AT 固件发布后，会等一段时间，待客户反馈稳定后，才上传到 Espressif Cloud 以供下载更新。因此，如果使用 ESP8266_NONOS_SDK_V1.5.0 及之后版本的 AT 固件暂时无法从 Espressif Cloud 升级。

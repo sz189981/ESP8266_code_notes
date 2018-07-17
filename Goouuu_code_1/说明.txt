@@ -1,0 +1,1 @@
+cygwin和GOOUUUSDK2.0环境搭建视频教程在ESP8266 Goouuu SDK下的GOOUUUSDK-2.0中；
